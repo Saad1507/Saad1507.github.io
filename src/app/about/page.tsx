@@ -7,16 +7,16 @@ export default function About() {
         <h1 className="text-4xl md:text-5xl font-extrabold text-slateDark tracking-tight">About Me</h1>
         <div className="w-16 h-1 bg-accentCobalt rounded-full"></div>
       </div>
-      
+
       <div className="prose prose-slate max-w-none text-lg text-slate-700 leading-relaxed space-y-6">
         <p>
-          I am a Computer Science engineer who transitioned into semiconductor architecture because of a deep fascination with how software execution is physically determined by digital logic.
+          I am a Computer Science engineer specializing in semiconductor architecture and digital design.
         </p>
         <p>
-          Throughout my computer science education, I focused heavily on C++ systems programming, learning how the compiler interfaces with the memory hierarchy. This natural curiosity led me to Verilog and Hardware Description Languages, where I began mathematically designing the modules (Cache Controllers, UART Transceivers) that software developers typically take for granted.
+          My background in C++ systems programming naturally extended into Hardware Description Languages, where I focus on designing complete subsystems like Cache Controllers and UART Transceivers in synthesizable Verilog.
         </p>
         <p>
-          My engineering philosophy is rooted in the <strong>ASIC Design Flow</strong> and rigorous functional verification. I don&apos;t just write behavioral Verilog that simulates correctly; I heavily utilize the open-source toolchain (Yosys, F4PGA, SymbiFlow) to understand how my logic synthesizes, maps onto physical Artix-7 LUTs, and resolves timing constraints.
+          My primary focus is on standard ASIC Design Flows and functional verification. I utilize open-source toolchains (Yosys, F4PGA) to verify how my logic synthesizes, maps onto Artix-7 primitives, and meets physical timing constraints.
         </p>
       </div>
 
