@@ -9,9 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        slateDark: "#0f172a",
+        navyDark: "#020617",
+        grayLight: "#f8fafc",
+        accentTeal: "#0d9488",
+        accentCobalt: "#2563eb",
       },
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+      }
     },
   },
   plugins: [],
