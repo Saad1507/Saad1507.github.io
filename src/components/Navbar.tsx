@@ -1,41 +1,74 @@
-'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
-
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+const links = [
+  ["Work", "/projects/"],
+  ["Experience", "/experience/"],
+  ["About", "/about/"],
+  ["CV", "/cv/"],
+  ["Contact", "/contact/"],
+];
 export default function Navbar() {
-  const pathname = usePathname();
-  const links = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Projects', href: '/projects' },
-    { label: 'Skills', href: '/skills' },
-    { label: 'ASIC Journey', href: '/asic-journey' },
-    { label: 'Resume', href: '/resume' },
-    { label: 'Contact', href: '/contact' },
-  ];
-
+  const path = usePathname();
+  const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  useEffect(() => setOpen(false), [path]);
+  useEffect(() => {
+    function escape(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggle.current?.focus();
+      }
+    }
+    if (open) document.addEventListener("keydown", escape);
+    return () => document.removeEventListener("keydown", escape);
+  }, [open]);
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/">
-          <span className="font-bold text-xl text-slateDark tracking-tight">Muhammed Saad</span>
+    <header className="site-header">
+      <div className="header-inner">
+        <Link href="/" className="wordmark" aria-label="Muhammad Saad, home">
+          <span className="monogram">
+            ms<span>.</span>
+          </span>
+          <span>Muhammad Saad</span>
         </Link>
-        <nav className="hidden md:flex space-x-6">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} className="relative py-1">
-              <span className={`text-sm font-medium transition-colors ${pathname === link.href ? 'text-accentCobalt' : 'text-slate-600 hover:text-slateDark'}`}>
-                {link.label}
-              </span>
-              {pathname === link.href && (
-                <motion.div 
-                  layoutId="underline" 
-                  className="absolute left-0 bottom-0 top-6 w-full h-0.5 bg-accentCobalt" 
-                  initial={false}
-                />
-              )}
+        <button
+          className="menu-toggle"
+          ref={toggle}
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          aria-expanded={open}
+          aria-controls="main-nav"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? "Close" : "Menu"}
+          <span aria-hidden="true">{open ? "×" : "☰"}</span>
+        </button>
+        <nav
+          id="main-nav"
+          className={open ? "main-nav is-open" : "main-nav"}
+          aria-label="Main navigation"
+        >
+          {links.map(([label, href]) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              aria-current={
+                path === href || path === href.slice(0, -1) ? "page" : undefined
+              }
+            >
+              {label}
             </Link>
           ))}
+          <a
+            href="https://github.com/Saad1507"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-github"
+          >
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
         </nav>
       </div>
     </header>

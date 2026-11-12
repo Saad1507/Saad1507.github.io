@@ -1,29 +1,69 @@
-import SkillCard from '@/components/SkillCard';
-
+import type { Metadata } from "next";
+import Link from "next/link";
+export const metadata: Metadata = {
+  title: "Tools and Technologies",
+  alternates: { canonical: "/skills/" },
+};
+const groups = [
+  [
+    "Application development",
+    "React, JavaScript, Vite, Tailwind CSS, React Router, Zustand, TanStack Query, Node.js, Express, Flask and REST APIs.",
+    "/software/",
+  ],
+  [
+    "Data and automation",
+    "Python, PostgreSQL, Prisma, SQLite, Requests, BeautifulSoup, Selenium, threaded collection and data validation.",
+    "/projects/pricexpert/",
+  ],
+  [
+    "Delivery and testing",
+    "Git, GitHub Actions, Docker Compose, Nginx, Bash, systemd, Playwright and pytest.",
+    "/experience/",
+  ],
+  [
+    "Mobile development",
+    "Dart, Flutter, Firebase Authentication, Firestore, go_router and asynchronous HTTP/JSON integration.",
+    "/projects/garageease/",
+  ],
+  [
+    "Systems programming",
+    "C++, STL, wxWidgets, cache modelling, Python threads/processes, queues and subprocess execution.",
+    "/projects/cpp-simulator/",
+  ],
+  [
+    "Digital hardware",
+    "Verilog, SystemVerilog, RV32I, AXI4-Lite, directed testbenches, UVM coursework, LibreLane, OpenROAD, Yosys and Sky130.",
+    "/hardware/",
+  ],
+];
 export default function Skills() {
-  const hardware = ["Verilog HDL", "RTL Design", "FSM Design", "Combinational Logic", "Sequential Logic", "Adders/ALUs"];
-  const verification = ["Functional Verification", "Testbench Development", "Randomized Stimulus", "Waveform Debugging"];
-  const protocols = ["AMBA APB", "UART Transceiver", "VGA Control"];
-  const asicFlow = ["Yosys Synthesis", "Place-and-Route Logs", "Timing Constraints (.xdc)", "Netlist Review"];
-  const software = ["C++ (OOP, STL, Pointers)", "Python Scripting", "GitHub Actions / CI", "wxWidgets"];
-
   return (
-    <div className="max-w-5xl mx-auto space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-12">
-      <div className="space-y-4">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-slateDark tracking-tight">Technical Skills</h1>
-        <div className="w-16 h-1 bg-accentCobalt rounded-full"></div>
-      </div>
-      
-      <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
-        My technical stack bridges the gap between low-level hardware description and high-level software automation.
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <SkillCard category="Hardware Description & RTL" skills={hardware} />
-        <SkillCard category="Functional Verification" skills={verification} />
-        <SkillCard category="SoC Protocols & Peripherals" skills={protocols} />
-        <SkillCard category="ASIC / FPGA Flow" skills={asicFlow} />
-        <SkillCard category="Software Engineering" skills={software} />
+    <div className="container page">
+      <header className="page-heading">
+        <p className="eyebrow">TOOLS & TECHNOLOGIES</p>
+        <h1>
+          Skills, connected
+          <br />
+          to the work.
+        </h1>
+        <p>
+          Technologies used across internship applications, independent projects
+          and coursework.
+        </p>
+      </header>
+      <div className="skills-list">
+        {groups.map(([name, text, href], i) => (
+          <section key={name}>
+            <span className="skill-number">0{i + 1}</span>
+            <div>
+              <h2>{name}</h2>
+              <p>{text}</p>
+              <Link className="text-link" href={href}>
+                Explore related work ↗
+              </Link>
+            </div>
+          </section>
+        ))}
       </div>
     </div>
   );

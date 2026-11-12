@@ -16,8 +16,8 @@ const config: Config = {
         accentCobalt: "#2563eb",
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
-      }
+        sans: ["var(--font-geist)", "Arial", "sans-serif"],
+      },
     },
   },
   plugins: [],

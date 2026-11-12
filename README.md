@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Muhammad Saad's portfolio
 
-## Getting Started
+Live at [saad1507.github.io](https://saad1507.github.io/).
 
-First, run the development server:
+A software-led portfolio with dedicated software, digital hardware and combined systems CVs. Built with Next.js, React and TypeScript, exported as a static site for GitHub Pages.
 
-```bash
+## Develop and build
+
+Use Node.js 20 or later.
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The production build includes linting and TypeScript checks and writes the static site to `out/`. To inspect that build locally:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+python -m http.server 8765 --bind 127.0.0.1 --directory out
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content
 
-## Learn More
+- `src/lib/projects.ts`: project descriptions, contribution statements, public repository links and CV metadata.
+- `src/app/`: home, software, hardware, experience, about, contact, skills and CV pages.
+- `src/components/`: navigation, project search, conceptual illustrations and interactive demonstrations.
+- `src/app/globals.css`: responsive design and reduced-motion support.
+- `public/cv/`: public PDF downloads. Keep names stable when updating files.
 
-To learn more about Next.js, take a look at the following resources:
+The software and combined CVs are public editions of existing documents. Confidential internship work is described at a general technical level; employer identities, private repository links and application/user data are excluded. Original local CV files are not edited by this site.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Illustrations explain project concepts and are not product screenshots. The browser cache demonstration is a separate illustration of LRU behaviour, not the original C++ application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Legacy URLs such as `/resume/`, `/asic-journey/` and the original project slugs remain available. `/Resume.pdf` retains a hardware CV for existing links.
 
-## Deploy on Vercel
+## Publication
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A push to `main` runs the existing **Deploy to GitHub Pages** workflow. It installs the lockfile dependencies, builds, uploads `out/` and deploys that artifact.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Before publishing content changes, check the narrow mobile layout, navigation, project filters, direct project URLs and PDF downloads.
+
+## Restore the previous website
+
+The complete version before this redesign is preserved in the remote tag:
+
+`portfolio-before-redesign-2026-11-11`
+
+Original commit: `586ed9b3aef5dc7a68222550b6240f9ac8735e48`.
+
+To inspect it without modifying the current site:
+
+```sh
+git fetch origin --tags
+git worktree add ../portfolio-original portfolio-before-redesign-2026-11-11
+```
+
+To undo only the redesign, find the commit titled **Rebuild portfolio around software and digital hardware** and revert it on an up-to-date, clean `main` branch:
+
+```sh
+git switch main
+git pull --ff-only
+git log --oneline
+git revert <redesign-commit>
+git push origin main
+```
+
+Reverting creates a normal history-preserving commit and triggers the Pages deployment. If later changes conflict, resolve them before pushing; do not force-push or discard unrelated work.
