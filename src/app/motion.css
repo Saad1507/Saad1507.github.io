@@ -1,0 +1,630 @@
+/* Code brackets around a routed signal: one mark for software and hardware. */
+.brand-mark {
+  width: 43px;
+  height: 43px;
+  flex: none;
+  overflow: visible;
+}
+.brand-tile {
+  fill: #192d3a;
+  transition:
+    fill 0.3s,
+    filter 0.3s;
+}
+.brand-bracket {
+  stroke: #eaf3f3;
+  stroke-width: 2.8;
+}
+.brand-trace {
+  stroke: #90d8c2;
+  stroke-width: 3;
+}
+.brand-node {
+  fill: #90d8c2;
+}
+.brand-packet {
+  stroke: #fff;
+  stroke-width: 3.5;
+  opacity: 0;
+  stroke-dasharray: 0.18 0.82;
+}
+.wordmark {
+  gap: 12px;
+}
+.wordmark:is(:hover, :focus-visible) .brand-tile {
+  fill: #244d55;
+}
+.project-visual {
+  --visual-play: paused;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+:is(.project-card, .hardware-feature):is(:hover, :focus-within) .project-visual,
+.project-visual:hover {
+  --visual-play: running;
+  border-color: #9dbbb6;
+}
+.visual-link:hover .visual-wave {
+  background: #1d3c4b;
+}
+.wave-row .signal-packet {
+  opacity: 0;
+  stroke: #f0fff9;
+  stroke-width: 2.4;
+  stroke-dasharray: 0.12 0.88;
+}
+.signal-cursor {
+  opacity: 0;
+  stroke: #90d8c2;
+  stroke-width: 0.8;
+}
+.flow-stem,
+.pipeline-node,
+.chip-bus {
+  position: relative;
+}
+.pipeline-join::before,
+.flow-stem::after,
+.chip-bus::after {
+  content: "";
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.pipeline-join::before,
+.flow-stem::after {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #285bc4;
+  left: calc(50% - 2px);
+  top: -2px;
+  z-index: 1;
+}
+.chip-bus::after {
+  inset: 0 auto 0 0;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, #64ae9370, transparent);
+}
+.main-nav > a:not(.nav-github) {
+  position: relative;
+  text-decoration: none;
+}
+.main-nav > a:not(.nav-github)::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+}
+.main-nav > a:is(:hover, :focus-visible, [aria-current])::after {
+  transform: scaleX(1);
+}
+.button {
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.button-primary:is(:hover, :focus-visible) {
+  box-shadow: 0 7px 17px -10px #18344290;
+}
+.cv-card {
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+.cv-card:is(:hover, :focus-within) {
+  border-color: #a3b8b4;
+  box-shadow: 0 14px 35px -25px #18344260;
+}
+.text-link,
+.quiet-link {
+  transition:
+    color 0.2s,
+    gap 0.2s;
+}
+.text-link:hover,
+.quiet-link:hover {
+  gap: 19px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    transition:
+      opacity 0.55s ease,
+      translate 0.55s cubic-bezier(0.2, 0.7, 0.3, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal="waiting"] {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  [data-reveal="visible"],
+  [data-reveal]:focus-within {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .brand-trace {
+    stroke-dasharray: 1;
+    animation: brand-draw 1.25s ease-out both;
+  }
+  .wordmark:is(:hover, :focus-visible) .brand-packet {
+    opacity: 1;
+    animation: signal-travel 1.65s linear infinite;
+  }
+  .wordmark:is(:hover, :focus-visible) .brand-bracket-left {
+    animation: bracket-left 1.65s ease-in-out infinite;
+  }
+  .wordmark:is(:hover, :focus-visible) .brand-bracket-right {
+    animation: bracket-right 1.65s ease-in-out infinite;
+  }
+  .wordmark:is(:hover, :focus-visible) .brand-node-end {
+    animation: node-glow 1.65s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .layer {
+    transition:
+      background 0.25s,
+      border-color 0.25s,
+      translate 0.25s;
+  }
+  .layer:is(:hover, :focus-visible) {
+    translate: 3px 0;
+  }
+  .layer-arrow {
+    transition: transform 0.25s;
+  }
+  .layer:is(:hover, :focus-visible) .layer-arrow {
+    transform: translate(2px, -2px);
+  }
+  .layer-copy {
+    animation: copy-enter 0.3s ease-out;
+  }
+  .system-sketch:is(:hover, :focus-within) .sketch-bottomline i {
+    background: linear-gradient(90deg, #638388 15%, #a5ebd0 50%, #638388 85%);
+    background-size: 200% 100%;
+    animation: delivery-flow 2s linear infinite;
+  }
+
+  /* The static drawing remains intact; a signal travels along its trace. */
+  .wave-row .signal-packet {
+    animation:
+      signal-travel 2.5s linear infinite,
+      signal-visible 2.5s linear infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .wave-row .signal-cursor {
+    animation: waveform-scan 2.5s linear infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .wave-row:nth-child(3) .signal-packet {
+    animation-delay: -0.3s;
+  }
+  .wave-row:nth-child(4) .signal-packet {
+    animation-delay: -0.6s;
+  }
+  .wave-row:nth-child(5) .signal-packet {
+    animation-delay: -0.9s;
+  }
+
+  /* Address decoding, row selection, then the data read. */
+  .address-bits b {
+    animation: address-select 2.7s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .address-bits b:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .address-bits b:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .memory-table > div:not(:first-child) {
+    animation: cache-row-select 2.7s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .memory-table > div:nth-child(3) {
+    animation-delay: -0.9s;
+  }
+  .memory-table > div:nth-child(4) {
+    animation-delay: -1.8s;
+  }
+  .memory-table > div:not(:first-child) i:last-child {
+    transform-origin: left;
+    animation: data-read 2.7s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .memory-table > div:nth-child(3) i:last-child {
+    animation-delay: -0.9s;
+  }
+  .memory-table > div:nth-child(4) i:last-child {
+    animation-delay: -1.8s;
+  }
+
+  /* Collection, process and retrieval diagrams share moving data pulses. */
+  .source-nodes span,
+  .chip-peripherals span {
+    animation: node-highlight 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .source-nodes span:nth-child(2),
+  .chip-peripherals span:nth-child(2) {
+    animation-delay: -0.8s;
+  }
+  .source-nodes span:nth-child(3),
+  .chip-peripherals span:nth-child(3) {
+    animation-delay: -1.6s;
+  }
+  .pipeline-join::before {
+    animation: join-packet 2.4s linear infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .flow-stem::after {
+    animation: stem-packet 2.4s linear infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .pipeline-store,
+  .query-result {
+    animation: result-lift 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .evidence-papers > div {
+    animation: evidence-rank 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .evidence-papers > div:nth-child(2) {
+    animation-delay: -0.8s;
+  }
+  .evidence-papers > div:nth-child(3) {
+    animation-delay: -1.6s;
+  }
+  .chip-core {
+    animation: chip-compute 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .chip-bus::after {
+    animation: bus-transfer 2.4s linear infinite;
+    animation-play-state: var(--visual-play);
+  }
+
+  /* Interface previews show staggered components and chat/message activity. */
+  .sketch-modules i {
+    animation: interface-update 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .sketch-modules i:nth-child(2) {
+    animation-delay: -0.8s;
+  }
+  .sketch-modules i:nth-child(3) {
+    animation-delay: -1.6s;
+  }
+  .sketch-row {
+    transform-origin: left;
+    animation: interface-line 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .sketch-row + .sketch-row {
+    animation-delay: -0.6s;
+  }
+  .phone-row {
+    animation: message-arrive 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .phone-row:nth-of-type(2) {
+    animation-delay: -0.8s;
+  }
+  .phone-row:nth-of-type(3) {
+    animation-delay: -1.6s;
+  }
+  .phone-action,
+  .sketch-button {
+    animation: action-pulse 2.4s ease-in-out infinite;
+    animation-play-state: var(--visual-play);
+  }
+  .cv-card:is(:hover, :focus-within) .cv-preview-lines i {
+    transform-origin: left;
+    animation: document-line 0.7s ease-out both;
+  }
+  .cv-card .cv-preview-lines i:nth-child(3n) {
+    animation-delay: 0.08s;
+  }
+}
+
+@keyframes brand-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes signal-travel {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes signal-visible {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  12%,
+  88% {
+    opacity: 1;
+  }
+}
+@keyframes bracket-left {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-1.5px);
+  }
+}
+@keyframes bracket-right {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(1.5px);
+  }
+}
+@keyframes node-glow {
+  0%,
+  65%,
+  100% {
+    transform: scale(1);
+  }
+  85% {
+    transform: scale(1.35);
+  }
+}
+@keyframes copy-enter {
+  from {
+    opacity: 0.3;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes delivery-flow {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+@keyframes waveform-scan {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  10%,
+  85% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(240px);
+  }
+}
+@keyframes address-select {
+  0%,
+  45%,
+  100% {
+    filter: brightness(1);
+  }
+  20% {
+    filter: brightness(1.2);
+  }
+}
+@keyframes cache-row-select {
+  0%,
+  45%,
+  100% {
+    background: transparent;
+  }
+  18%,
+  32% {
+    background: #b7d9d0;
+  }
+}
+@keyframes data-read {
+  0%,
+  45%,
+  100% {
+    transform: scaleX(1);
+  }
+  18% {
+    transform: scaleX(0.68);
+  }
+  32% {
+    transform: scaleX(1);
+    background: #648fa9;
+  }
+}
+@keyframes node-highlight {
+  0%,
+  65%,
+  100% {
+    background: #f5faf7;
+  }
+  30% {
+    background: #b9e1d0;
+  }
+}
+@keyframes join-packet {
+  0%,
+  25% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  35%,
+  58% {
+    opacity: 1;
+  }
+  65%,
+  100% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+@keyframes stem-packet {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  62%,
+  80% {
+    opacity: 1;
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: translateY(21px);
+  }
+}
+@keyframes result-lift {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  85% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes evidence-rank {
+  0%,
+  65%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes chip-compute {
+  0%,
+  100% {
+    box-shadow: 0 18px 35px -25px #174335;
+  }
+  45% {
+    box-shadow:
+      0 0 0 8px #80baa322,
+      0 0 28px #548e7850;
+  }
+}
+@keyframes bus-transfer {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(233%);
+  }
+}
+@keyframes interface-update {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+    background: #d5e6f7;
+  }
+}
+@keyframes interface-line {
+  0%,
+  65%,
+  100% {
+    transform: scaleX(1);
+  }
+  30% {
+    transform: scaleX(0.7);
+  }
+}
+@keyframes message-arrive {
+  0%,
+  65%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  15% {
+    opacity: 0.35;
+    transform: translateX(5px);
+  }
+  35% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes action-pulse {
+  0%,
+  65%,
+  100% {
+    filter: brightness(1);
+  }
+  35% {
+    filter: brightness(1.3);
+  }
+}
+@keyframes document-line {
+  from {
+    transform: scaleX(0.6);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 540px) {
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+  }
+  .wordmark {
+    gap: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    translate: none;
+  }
+  .brand-packet,
+  .signal-packet,
+  .signal-cursor {
+    display: none;
+  }
+}
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+}

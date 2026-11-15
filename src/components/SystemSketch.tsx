@@ -50,7 +50,9 @@ export default function SystemSketch() {
       </div>
       <div className="layer-description" aria-live="polite">
         <span className="mini-label">MY WORK ACROSS THE STACK</span>
-        <p>{layers[active].text}</p>
+        <p key={active} className="layer-copy">
+          {layers[active].text}
+        </p>
       </div>
       <div className="sketch-bottomline">
         <span>BUILD</span>

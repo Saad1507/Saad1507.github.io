@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import BrandMark from "./BrandMark";
 const links = [
   ["Work", "/projects/"],
   ["Experience", "/experience/"],
@@ -28,9 +29,7 @@ export default function Navbar() {
     <header className="site-header">
       <div className="header-inner">
         <Link href="/" className="wordmark" aria-label="Muhammad Saad, home">
-          <span className="monogram">
-            ms<span>.</span>
-          </span>
+          <BrandMark />
           <span>Muhammad Saad</span>
         </Link>
         <button

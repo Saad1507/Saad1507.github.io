@@ -130,6 +130,8 @@ export default function ProjectVisual({
               <span>{s}</span>
               <svg viewBox="0 0 240 30">
                 <path
+                  className="signal-trace"
+                  pathLength="1"
                   d={
                     i === 0
                       ? "M0 25H20V5H40V25H60V5H80V25H100V5H120V25H140V5H160V25H180V5H200V25H220V5H240"
@@ -138,6 +140,18 @@ export default function ProjectVisual({
                         : "M0 25H60V5H160V25H240"
                   }
                 />
+                <path
+                  className="signal-packet"
+                  pathLength="1"
+                  d={
+                    i === 0
+                      ? "M0 25H20V5H40V25H60V5H80V25H100V5H120V25H140V5H160V25H180V5H200V25H220V5H240"
+                      : i === 3
+                        ? "M0 15H30L40 5H160L170 15H240"
+                        : "M0 25H60V5H160V25H240"
+                  }
+                />
+                <line className="signal-cursor" x1="0" x2="0" y1="0" y2="30" />
               </svg>
             </div>
           ))}

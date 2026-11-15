@@ -26,11 +26,17 @@ python -m http.server 8765 --bind 127.0.0.1 --directory out
 - `src/app/`: home, software, hardware, experience, about, contact, skills and CV pages.
 - `src/components/`: navigation, project search, conceptual illustrations and interactive demonstrations.
 - `src/app/globals.css`: responsive design and reduced-motion support.
+- `src/app/motion.css`: logo, hover/focus illustration animations and interface transitions.
+- `src/components/PageMotion.tsx`: one-time scroll entrances with progressive enhancement and reduced-motion handling.
 - `public/cv/`: public PDF downloads. Keep names stable when updating files.
 
 The software and combined CVs are public editions of existing documents. Confidential internship work is described at a general technical level; employer identities, private repository links and application/user data are excluded. Original local CV files are not edited by this site.
 
 Illustrations explain project concepts and are not product screenshots. The browser cache demonstration is a separate illustration of LRU behaviour, not the original C++ application.
+
+The code-and-circuit logo and project illustrations animate on hover or keyboard focus. Illustration loops pause when interaction ends. Entrance effects run once as content comes into view. The operating system's reduced-motion preference disables animations, and content stays readable without JavaScript.
+
+The version immediately before the logo and motion update is preserved as `portfolio-before-motion-2026-11-15`.
 
 Legacy URLs such as `/resume/`, `/asic-journey/` and the original project slugs remain available. `/Resume.pdf` retains a hardware CV for existing links.
 

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./motion.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PageMotion from "@/components/PageMotion";
 const geist = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist",
@@ -35,7 +37,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/icon.svg" },
+  icons: { icon: "/icon.svg?v=2" },
 };
 export default function RootLayout({
   children,
@@ -51,6 +53,7 @@ export default function RootLayout({
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
+        <PageMotion />
       </body>
     </html>
   );
